@@ -78,6 +78,8 @@ def get_sum():
 
         # Create an empty list to store the data
         data = [0,0]
+        all_imported_data=[0,0]
+        all_exported_data=[0,0]
 
         # Loop over each row in the CSV file
         for row in reader:
@@ -92,16 +94,19 @@ def get_sum():
             # Add the dictionary to the list of data
                 data[0]+=row_data['imported']
                 data[1]+=row_data['exported']
+                all_imported_data.append(row_data['imported'])
+                all_exported_data(row['exported'])
             else:
                 continue
 
         print(f'Imported: {data[0]},Exported :{data[1]}')
-        return (data[0],data[1])
+        return (data[0],data[1],all_imported_data,all_exported_data)
 def get_difference():
     x1,x2=get_sum()
     diff=abs(x1-x2)
     print(diff)
     return diff
+def get_extrema():
 
 
 
