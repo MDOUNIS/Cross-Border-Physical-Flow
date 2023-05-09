@@ -70,7 +70,7 @@ def download_file(driver, url):
     # Wait for download link to be available and get download link URL
     element = driver.find_element(By.XPATH, "//div[@class='export-item']//a[@dataitem='ALL' and @timerange='YEAR' and @exporttype='CSV']")
     driver.execute_script("arguments[0].click();", element) #clicking normally doesn't work. asking driver to click using javascript
-def get_data():
+def get_sum():
     with open("Cross-Border Physical Flow_202301010000-202401010000.csv", newline='') as my_data:
         # Create a CSV reader object
         reader = csv.reader(my_data, delimiter=',')
@@ -96,6 +96,13 @@ def get_data():
                 continue
 
         print(f'Imported: {data[0]},Exported :{data[1]}')
+        return (data[0],data[1])
+def get_difference():
+    x1,x2=get_sum()
+    diff=abs(x1-x2)
+    print(diff)
+    return diff
+
 
 
 def close_driver(driver):
@@ -109,7 +116,8 @@ def main():
     download_file(driver, URL)
     time.sleep(20)
     close_driver(driver)
-    get_data()
+    get_sum()
+    get_difference()
 
 
 if __name__ == '__main__':
